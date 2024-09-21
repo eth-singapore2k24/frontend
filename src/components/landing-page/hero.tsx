@@ -3,9 +3,23 @@ import highlight from "@/assets/effects/highlight.png";
 import { Button } from "../ui/button";
 import { ArrowRight } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
+import { useSDK } from "@metamask/sdk-react";
+import React, { useState } from "react";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const [account, setAccount] = useState<string>();
+  const { sdk, connected, connecting, provider, chainId } = useSDK();
+
+  const connect = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      setAccount(accounts?.[0]);
+      navigate("/onboard")
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
+  };
 
   return (
     <div className="container items-center mt-24">
@@ -30,14 +44,12 @@ const Hero = () => {
         </p>
       </div>
       {/* Get Started */}
-      <Button
+      <Button 
         variant={"expandIcon"}
         Icon={<ArrowRight weight="bold" />}
         iconPlacement="right"
-        className="w-64 rounded-xl shadow-button text-2xl "
-        onClick={() => navigate("/onboard")}
-      >
-        Get Started
+        className="w-64 rounded-xl shadow-button text-2xl " onClick={connect}>
+        Connect
       </Button>
     </div>
   );

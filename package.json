@@ -13,6 +13,8 @@
     "@dynamic-labs/ethereum": "^3.0.2",
     "@dynamic-labs/ethers-v6": "^3.0.2",
     "@dynamic-labs/sdk-react-core": "^3.0.2",
+    "@metamask/sdk-react": "^0.28.4",
+    "@metamask/sdk-react-ui": "^0.28.4",
     "@phosphor-icons/react": "^2.1.7",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-label": "^2.1.0",
@@ -34,6 +36,7 @@
     "tabs": "^0.2.0",
     "tailwindcss-animate": "^1.0.6",
     "viem": "^2.21.8",
+    "web3": "^4.13.0",
     "web3modal": "^1.9.12"
   },
   "devDependencies": {
