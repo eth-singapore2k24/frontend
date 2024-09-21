@@ -6,11 +6,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Cardholder } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
+import { signIn, signOut, useSession } from "next-auth/react"
 
 interface CreateAccountProps {
   currentStepIndex: number;
@@ -19,11 +19,15 @@ interface CreateAccountProps {
 
 const CreateAccount = (props: CreateAccountProps) => {
   const navigate = useNavigate();
-  const handleConnect = () => {
-    // TODO: wallet connect + next step
-    console.log("Connecting wallet...");
-    props.setCurrentStepIndex(props.currentStepIndex + 1);
-  };
+  const handleConnect = async () => {
+    try {
+      const sessionx = await signIn("worldcoin")
+      console.log("session: ", sessionx);
+      const { data: session } = useSession()
+      console.log("sessionUser: ", session.user);
+    } catch (error) {
+      console.error("error: ", error);
+    }
   return (
     <Card className="rounded-none space-y-5 ">
       <CardHeader>
